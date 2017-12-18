@@ -1,0 +1,5 @@
+﻿@Model int?
+@if (Model.HasValue)
+{ 
+    @String.Format("{0:N0}", Model)
+}

@@ -1,0 +1,154 @@
+﻿@model PagedList.IPagedList<QFSLINKS.Models.SDR_QFS_Data>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Items Administration";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 class="panel-title">Menu Items </h1>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-9 col-xl-12 col-xs-9">
+            <div class="panel-body">
+                @using (Html.BeginForm("MenuItem", "Home", FormMethod.Get))
+                {
+                    <div>
+                        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { placeholder = "Enter Filter" })
+                        <input class="btn btn-primary btn-lg" type="submit" value="Search" />
+                    </div>
+                    <div class="floating-box">
+                        @Html.PagedListPager(Model, page => Url.Action("MenuItem", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                    </div>
+                    <div class="floating-box">
+                        <label>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount </label>
+                    </div>
+                    <div class="floating-box">
+                        <input type="hidden" value="@Model.PageNumber" id="pages" name="page" />
+                        <input title="Add user" class="button-add" value="" onclick="showhide('adduserpanel')" />
+                    </div>
+                }
+                @using (Html.BeginForm("AddItem", "Home", FormMethod.Post))
+                {
+                    <input type="hidden" name="Hsearch" value="@ViewBag.CurrentFilter" />
+                    <input type="hidden" name="Hsortname" value="@ViewBag.NameSortParm" />
+                    <input type="hidden" name="Hsortdata" value="@ViewBag.DataSortParm" />
+                    <input type="hidden" name="Hpage" value="@Model.PageNumber" />
+
+                    @*/*****************************NEWITEM********************************************/*@
+                    <div id="adduserpanel" style="display:none">
+                        <div class="panel panel-default">
+                            <table class="table table-hover rounded" id="UserTableAdd">
+                                <tr class="info">
+                                    <td>TopicId</td>
+                                    <td>Type</td>
+                                    <td>Order Number</td>
+                                    <td>Description</td>
+                                    <td>Data</td>
+                                    <td>Location</td>
+                                    <td>Action</td>
+                                </tr>
+
+                                <tr class="info2" id="adduserpanel2">
+                                    <td>
+                                        <input type="text" placeholder="enter next topic id number" name="TopicID" value="" />
+                                        @Html.ValidationMessageFor(modelItem => @Model.FirstOrDefault().TopicID)
+                                    </td>
+                                    <td>
+                                        @Html.DropDownList("Type", new SelectList(ViewBag.LinkType))
+                                    </td>
+                                    <td>
+                                        <input type="number" name="SortOrder" id="sortOrder" min="0" max="999" step="1" value="120">
+                                    </td>
+                                    <td>
+                                        <textarea rows="4" cols="50" value="" placeholder="enter Description" name="Description"></textarea>
+                                    </td>
+                                    <td>
+                                        <input type="text" value="" placeholder="enter value" name="Data" />
+                                    </td>
+                                    <td>
+                                        <input type="text" value="" placeholder="enter location" name="Location" />
+                                    </td>
+                                    <td>
+                                        <input class="btn btn-primary btn-lg" type="submit" value="Save" />
+                                    </td>
+                                </tr>
+                                @*/*****************************NEWITEM*********************************************/*@
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <table class="table table-hover rounded table-bordered" id="UserTable">
+                            <tr class="info">
+                                <th>
+                                    @*Sort the list when user click the link*@
+                                    @Html.ActionLink("TopicId", "MenuItem", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                                </th>
+                                <th>
+                                    @*Sort the list when user click the link*@
+                                    @Html.ActionLink("Data", "MenuItem", new { sortOrder = ViewBag.DataSortParm, currentFilter = ViewBag.CurrentFilter })
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().SortOrder)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().Location)
+                                </th>
+                                <th>
+                                    Details
+                                </th>
+                            </tr>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="info2">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TopicID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Data)
+                                        </td>
+                                        <td>
+                                            @if (item.SortOrder != null)
+                                            {
+                                                @Html.DisplayFor(modelItem => item.SortOrder)
+                                            }
+                                            else
+                                            {
+                                                @Html.DisplayFor(modelItem => item.SortOrder)
+                                            }
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Location)
+                                        </td>
+                                        <td class="vim">
+                                            <button type="button" class="btn btn-default btn-sm" onclick="LinkFunctions(0,this)" title="See Details" data-topic="@item.TID" data-toggle="modal" data-target="#LinkOptionsModal">
+                                                <span class="glyphicon glyphicon-open"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm" onclick="LinkFunctions(1,this)" title="Edit link" data-topic="@item.TID" data-toggle="modal" data-target="#LinkOptionsModal">
+                                                <span class="glyphicon glyphicon-edit"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm" onclick="LinkFunctions(2,this)" title="delete link" data-topic="@item.TID" data-toggle="modal" data-target="#LinkOptionsModal">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    Html.RenderPartial("LinkOptionsModal");
+                    //Html.RenderPartial("OptionModal");
+                } @*//Closing the form*@
+            </div>
+        </div>
+    </div>
+</div>

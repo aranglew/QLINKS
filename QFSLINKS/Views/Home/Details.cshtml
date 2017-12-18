@@ -1,0 +1,131 @@
+﻿@model IEnumerable<QFSLINKS.Models.DTO_menubyuser>
+<style>
+    table {
+        table-layout: fixed;
+    }
+
+        table th, table td {
+            overflow: hidden;
+        }
+</style>
+
+<div class="panel panel-default"> 
+    <div class="row">
+        <div class="col-md-12 col-sm-3 col-xl-12 col-xs-3">
+            <div class="panel-heading">
+                <h1 class="panel-title">User Menu Options </h1>
+            </div>
+            <div class="floating-box">
+                        @*<input title="Add user" class="button-add" value="" onclick="showhide('adduserpanel')" />*@
+                        <input type="button" title="Add Link" class="button-add" onclick="NewUserLink('Add', this)" data-toggle="modal" data-target="#NewUserLink" data-user="@ViewBag.CurrentUser" id="plusbutton" />
+               <h1> Username : @ViewBag.CurrentUser </h1>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("AddLink", "Home", FormMethod.Post)){
+                <fieldset>
+                     <legend runat=server visible="false"></legend>
+                    <p>
+                        @Html.ActionLink("Back to List", "UserList", new { page = ViewBag.page, searchString = ViewBag.CurrentFilter })
+                    </p>
+                    
+                    @if (Model != null)
+                    {
+                        <div class="panel panel-default">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered rounded">
+                                    <tr class="info">
+                                        <th class="col-lg-1">
+                                            Item
+                                        </th>
+                                        <th class="col-lg-1">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().TopicId)
+                                        </th>
+                                        <th class="col-lg-1">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
+                                        </th>
+                                        <th class="col-lg-1">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().Type)
+                                        </th>
+                                        <th class="col-lg-1">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().Location)
+                                        </th>
+                                        <th class="col-lg-1">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().Data)
+                                        </th>
+                                        <th class="col-lg-1">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().Format)
+                                        </th>
+                                        <th class="col-lg-1">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().SortOrder)
+                                        </th>
+                                        <th class="col-lg-1">
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().DataU)
+                                        </th>
+                                        <th class="col-lg-1">
+                                            <span>Options</span> 
+                                        </th>
+                                    </tr>
+
+                                    <tbody>
+                                        @{int counter = 0; }
+                                        @foreach (var item in Model)
+                                        {
+                                        counter++;
+                                        <tr class="info2">
+                                            <td>
+                                                <span>@counter</span>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TopicId)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Description)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Type)
+                                            </td>
+                                            <td class="col-lg-1">
+                                                @Html.DisplayFor(modelItem => item.Location)
+                                            </td>
+                                            <td >
+                                                @Html.DisplayFor(modelItem => item.Data)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Format)
+                                            </td>
+                                            <td class="vim">
+                                                @Html.DisplayFor(modelItem => item.SortOrder)
+                                            </td>
+                                            <td class="vim">
+                                                @Html.DisplayFor(modelItem => item.DataU)
+                                            </td>
+                                            <td class="vim">
+                                                <button type="button" class="btn btn-default btn-sm" onclick="ShowOptionDetail(0,this)" title="See Details" data-TUID="@item.TopicUserID" data-user="@item.Username" data-toggle="modal" data-target="#OptionModal">
+                                                    <span class="glyphicon glyphicon-open"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-sm" onclick="ShowOptionDetail(1,this)" title="Edit link for this user" data-TUID="@item.TopicUserID" data-user="@item.Username" data-toggle="modal" data-target="#OptionModal">
+                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-sm" onclick="ShowOptionDetail(2,this)" title="delete link for this user" data-TUID="@item.TopicUserID" data-user="@item.Username" data-toggle="modal" data-target="#OptionModal">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </button>
+                                            </td>
+                                    </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
+                </fieldset>
+                <p>
+                    @Html.ActionLink("Back to List", "UserList", new { page = ViewBag.page, searchString = ViewBag.CurrentFilter })
+                </p>
+                Html.RenderPartial("NewUserLink");
+                Html.RenderPartial("OptionModal");
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@*<script src="~/Scripts/Generalfnc.js"></script>*@

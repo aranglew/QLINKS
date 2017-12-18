@@ -1,0 +1,120 @@
+﻿@*//Placeholder for the User Details information that will be populated on a Javascript function*@
+@*This is the partial view used in Details for users links*@
+<div class="modal fade" tabindex="-1" role="dialog" id="OptionModal" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">My Title</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xl-6 col-xs-6">
+                        <div class="panel-body">
+                            <fieldset id="modaloptionColumn1" disabled>
+
+                                <div class="form-group">
+                                    @Html.Label("Type", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-text-width "></i></span>
+                                        @Html.TextBox("Type", null, new { id = "Type", @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("Description", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                                        @Html.TextBox("Description", null, new { id = "Description", @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("Location", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                        @Html.TextBox("Location", null, new { id = "Location", @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("Data", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-menu-hamburger"></i></span>
+                                        @Html.TextBox("Data", null, new { id = "Data", @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("Format", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-eye-open"></i></span>
+                                        @Html.TextBox("Format", null, new { id = "Format", @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xl-6 col-xs-6">
+                        <div class="panel-body">
+                            <fieldset id="modaloptionColumn2" disabled>
+                                <div class="form-group">
+                                    @Html.Label("TopicUserId", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
+                                        @Html.TextBox("TopicUserId", null, new { id = "TopicUserId", @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("TopicId", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-text-size "></i></span>
+                                        @Html.TextBox("TopicId", null, new { id = "TopicId", @class = "form-control" })
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    @Html.Label("SortOrder", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-sort-by-order"></i></span>
+                                        @Html.TextBox("SortOrder", null, new { id = "SortOrder", @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("Datau", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-menu-hamburger"></i></span>
+                                        @Html.TextBox("Datau", null, new { id = "Datau", @class = "form-control" })
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBox("VimsVisible", false, new { @id = "VimsVisible", @title = "Allows user to close incidents for other users" })<b>Vims Delegate</b>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="DivDeleteText"  class="alert-danger"><span id="ShowTextDelete">Are you sure to delete this option for this user?</span></div>
+                <button type="button" class="btn btn-primary" id="CloseBO" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="savebuttonO" onClick="SaveUserOption()">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->       

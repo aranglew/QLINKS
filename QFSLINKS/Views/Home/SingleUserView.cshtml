@@ -1,0 +1,166 @@
+﻿@*//Placeholder for the User Details information that will be populated on a Javascript function*@
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">My Title</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xl-6 col-xs-6">
+                        <div class="panel-body">
+                            <fieldset id="modaluser" disabled>
+
+                                <div class="form-group">
+                                    @Html.Label("Username", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        @Html.TextBox("username", null, new { id = "username", @class = "form-control" , placeholder="Username"})
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("Full Name", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user "></i></span>
+                                        @Html.TextBox("userdata", null, new { id = "userdata", @class = "form-control", placeholder = "Full name" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">                                                        
+                                    @Html.Label("Division", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-home "></i></span>
+                                        <select id="division" class = "form-control"> </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("Location", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-object-align-bottom"></i></span>
+                                        @Html.TextBox("location", null, new { id = "location", @class = "form-control", placeholder = "Location e.g. Clayton" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("Topic Id", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-sort-by-attributes"></i></span>
+                                        @Html.TextBox("topicid", null, new { id = "topicid", @class = "form-control", @readonly = "readonly", placeholder = "TopicId" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("Topic User Id", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-text-width"></i></span>
+                                        @Html.TextBox("topicuserid", null, new { id = "topicuserid", @class = "form-control", @readonly = "readonly", placeholder = "TopicUserId" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBox("VisibleD", false, new { @id = "vimsdelegate" , @title = "Allows user to close incidents for other users" })<b>Vims Delegate</b></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xl-6 col-xs-6">
+                        <div class="panel-body">
+                            <fieldset id="modaluser2" disabled>
+                                <div class="form-group">
+                                    @Html.Label("Email", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                        @Html.TextBox("email", null, new { id = "email", @class = "form-control", placeholder = "Email" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("Initials", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-font"></i></span>
+                                        @Html.TextBox("initials", null, new { id = "initials", @class = "form-control", placeholder = "Inititals" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("Phone", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                                        @Html.TextBox("phone", null, new { id = "phone", @class = "form-control", placeholder = "Phone number" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("Access", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-log-in"></i></span>
+                                        @Html.TextBox("Access", null, new { id = "Access", @class = "form-control" , placeholder = "Access e.g. std#0#SFOL#SOG#" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("AccessA", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-log-in"></i></span>
+                                        @Html.TextBox("Accessa", null, new { id = "Accessa", @class = "form-control", placeholder = "AccessA"  })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("Vims Access", new { @class = "control-label" })
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-font"></i></span>
+                                        @Html.TextBox("vimsaccess", null, new { id = "vimsaccess", @class = "form-control", placeholder = "e.g. DivQC#" }) 
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBox("VisibleV", false, new { @id = "vimsvisible" })<b>Vims Visible</b></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                        
+                        <fieldset id="CopyUserform">
+                            <hr />
+                            <div class="form-group">
+                                @Html.Label("Copy Links To User:", new { @class = "control-label" })
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <select id="CopyTousername" class="form-control"> </select>
+                                </div>
+                                <br>
+                                <div id="LinksWarning" class="alert-warning" style="display:none">                                    
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-warning-sign"></i></span>                                    
+                                    <span class="input-group-addon">You Must Select a user from the list to copy links to.</span>
+                                </div>
+                            </div>
+
+                        </fieldset>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="CopyUserid" onClick="CopyUser()">Copy User</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="savebutton" onClick="SaveUser()">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->       

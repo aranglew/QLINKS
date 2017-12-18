@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>@ViewBag.Title - Links</title>
+
+
+        <environment include="Development">
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="~/css/site.css" />
+        </environment>
+        <environment exclude="Development">
+            <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        </environment>           
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <header>
+                <div class="container">
+                    <div class="float-left">
+                        QLINKS
+                    </div>
+                    <div class="float-right">
+                        <section id="login">
+                            User:<span class="username">@User.Identity.Name</span>!
+                        </section>
+                    </div>
+                </div>
+            </header>
+
+            <div class="container-fluid">
+                <ul class="nav nav-tabs ">
+                    <li role="presentation" >@Html.ActionLink("UserList", "UserList", "Home")</li>
+                    <li role="presentation">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li role="presentation">@Html.ActionLink("Menu Items", "MenuItem", "Home")</li>
+                </ul>
+
+            </div>
+        </nav>
+        <div class="container" id="page">
+            <header>
+                <div id="title">
+					<h1>QFS LINKS Application</h1>
+				</div>
+            </header>
+
+                <section id="main">
+                    @RenderBody()
+                </section>
+        </div>
+	    <nav class="navbar navbar-default navbar-fixed-bottom">
+	        <div class="container">
+	        <span>@DateTime.Now.Year - Links Application mes@visy.com.au</span> <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true" ></span>
+	        </div>
+	    </nav>
+
+        <environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+            </script>
+            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+            </script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
+
+        @*@RenderSection("Scripts", required: false)*@
+        @if (IsSectionDefined("scripts"))
+        {
+            RenderSection("scripts");
+        }
+
+
+
+
+
+
+    </body>
+</html>

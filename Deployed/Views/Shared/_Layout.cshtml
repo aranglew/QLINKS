@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+    	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>@ViewBag.Title - Links</title>
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/themes/base/css")                
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <header>
+                <div class="container">
+                    <div class="float-left">
+                        QLINKS
+                    </div>
+                    <div class="float-right">
+                        <section id="login">
+                            User:<span class="username">@User.Identity.Name</span>!
+                        </section>
+                    </div>
+                </div>
+            </header>
+
+            <div class="container-fluid">
+                <ul class="nav nav-tabs ">
+                    <li role="presentation" >@Html.ActionLink("UserList", "UserList", "Home")</li>
+                    <li role="presentation">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li role="presentation">@Html.ActionLink("Menu Items", "MenuItem", "Home")</li>
+                </ul>
+
+            </div>
+        </nav>
+        <div class="container" id="page">
+            <header>
+                <div id="title">
+					<h1>QFS LINKS Application</h1>
+				</div>
+            </header>
+
+                <section id="main">
+                    @RenderBody()
+                </section>
+        </div>
+	    <nav class="navbar navbar-default navbar-fixed-bottom">
+	        <div class="container">
+	        <span>@DateTime.Now.Year - Links Application mes@visy.com.au</span> <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true" ></span>
+	        </div>
+	    </nav>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/scripts")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>
