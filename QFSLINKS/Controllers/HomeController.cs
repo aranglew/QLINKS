@@ -16,7 +16,7 @@ namespace QFSLINKS.Controllers
      string sortOrder,
      string currentFilter,
      string searchString,
-     int? page)
+     int? page) 
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
