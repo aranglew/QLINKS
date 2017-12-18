@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using QFSLINKS.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace QFSLINKS.Data
 {
@@ -42,6 +43,7 @@ namespace QFSLINKS.Data
 }
     public class Datau
 {
+    [Key]
     public int TopicUserID { get; set; }
     public decimal SortOrder { get; set; }
     public int TopicID { get; set; }
