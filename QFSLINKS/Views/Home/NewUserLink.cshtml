@@ -14,8 +14,10 @@
                             <fieldset id="modalOption1" disabled>
 
                                 <div class="form-group">
-                                    @Html.Hidden("CurrentUser")                                                        
-                                    @Html.Label("New Option", new { @class = "control-label" })
+                                    @Html.Hidden("CurrentUser")    
+                                    @Html.DisplayName("New Option")
+                                    @*@Html.Label("New Option", new { @class = "control-label" })*@
+                                    @*<label class="control-label">New Option</label>*@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-home "></i></span>
                                         <select id="NewLink" class = "form-control"> </select>
@@ -23,7 +25,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Description", new { @class = "control-label" })
+                                    @*@Html.Label("Description", new { @class = "control-label" })*@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         @Html.TextBox("Description", null, new { id = "Description", @class = "form-control" })

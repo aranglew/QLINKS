@@ -13,49 +13,49 @@
                             <fieldset id="modaluser" disabled>
 
                                 <div class="form-group">
-                                    @Html.Label("Username", new { @class = "control-label" })
+                                    <label class="control-label">Username</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user blue"></i></span>
                                         @Html.TextBox("username", null, new { id = "username", @class = "form-control" , placeholder="Username"})
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Full Name", new { @class = "control-label" })
+                                    <label class="control-label">Full Name</label>                                    
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user "></i></span>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user blue"></i></span>
                                         @Html.TextBox("userdata", null, new { id = "userdata", @class = "form-control", placeholder = "Full name" })
                                     </div>
                                 </div>
 
-                                <div class="form-group">                                                        
-                                    @Html.Label("Division", new { @class = "control-label" })
+                                <div class="form-group">    
+                                    <label class="control-label">Division</label>                                    
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-home "></i></span>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-home blue"></i></span>
                                         <select id="division" class = "form-control"> </select>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Location", new { @class = "control-label" })
+                                    <label class="control-label">Location</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-object-align-bottom"></i></span>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-object-align-bottom blue"></i></span>
                                         @Html.TextBox("location", null, new { id = "location", @class = "form-control", placeholder = "Location e.g. Clayton" })
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Topic Id", new { @class = "control-label" })
+                                    <label class="control-label">Topic Id</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-sort-by-attributes"></i></span>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-sort-by-attributes blue"></i></span>
                                         @Html.TextBox("topicid", null, new { id = "topicid", @class = "form-control", @readonly = "readonly", placeholder = "TopicId" })
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Topic User Id", new { @class = "control-label" })
+                                    <label class="control-label">Topic User Id</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-text-width"></i></span>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-text-width blue"></i></span>
                                         @Html.TextBox("topicuserid", null, new { id = "topicuserid", @class = "form-control", @readonly = "readonly", placeholder = "TopicUserId" })
                                     </div>
                                 </div>
@@ -73,50 +73,51 @@
                         <div class="panel-body">
                             <fieldset id="modaluser2" disabled>
                                 <div class="form-group">
-                                    @Html.Label("Email", new { @class = "control-label" })
+                                    <label class="control-label">Email</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope blue"></i></span>
                                         @Html.TextBox("email", null, new { id = "email", @class = "form-control", placeholder = "Email" })
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Initials", new { @class = "control-label" })
+                                    <label class="control-label">Initials</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-font"></i></span>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-font blue"></i></span>
                                         @Html.TextBox("initials", null, new { id = "initials", @class = "form-control", placeholder = "Inititals" })
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Phone", new { @class = "control-label" })
+                                    <label class="control-label">Phone</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-phone blue"></i></span>
                                         @Html.TextBox("phone", null, new { id = "phone", @class = "form-control", placeholder = "Phone number" })
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Access", new { @class = "control-label" })
+                                    <label class="control-label">Access</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-log-in"></i></span>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-log-in blue"></i></span>
                                         @Html.TextBox("Access", null, new { id = "Access", @class = "form-control" , placeholder = "Access e.g. std#0#SFOL#SOG#" })
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("AccessA", new { @class = "control-label" })
+                                    <label class="control-label">AccessA</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-log-in"></i></span>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-log-in blue"></i></span>
                                         @Html.TextBox("Accessa", null, new { id = "Accessa", @class = "form-control", placeholder = "AccessA"  })
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Vims Access", new { @class = "control-label" })
+                                    <label class="control-label">Vims Access</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-font"></i></span>
-                                        @Html.TextBox("vimsaccess", null, new { id = "vimsaccess", @class = "form-control", placeholder = "e.g. DivQC#" }) 
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-font blue"></i></span>
+                                        @Html.TextBox("vimsaccess", null, new { id = "vimsaccess", @class = "form-control", placeholder = "e.g. DivQC#" })
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign blue "></i></span>
                                     </div>
                                 </div>
 
@@ -136,9 +137,9 @@
                         <fieldset id="CopyUserform">
                             <hr />
                             <div class="form-group">
-                                @Html.Label("Copy Links To User:", new { @class = "control-label" })
+                                <label class="control-label">Copy Links To User:</label>                                    
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user blue"></i></span>
                                     <select id="CopyTousername" class="form-control"> </select>
                                 </div>
                                 <br>

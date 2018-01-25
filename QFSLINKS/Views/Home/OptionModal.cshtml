@@ -14,7 +14,9 @@
                             <fieldset id="modaloptionColumn1" disabled>
 
                                 <div class="form-group">
-                                    @Html.Label("Type", new { @class = "control-label" })
+                                    @*@Html.Label("Type", new { @class = "control-label" })*@
+                                    <label class="control-label">Type</label>
+                                    
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-text-width "></i></span>
                                         @Html.TextBox("Type", null, new { id = "Type", @class = "form-control" })
@@ -22,7 +24,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Description", new { @class = "control-label" })
+                                    @*@Html.Label("Description", new { @class = "control-label" })*@
+                                    <label class="control-label">Description</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
                                         @Html.TextBox("Description", null, new { id = "Description", @class = "form-control" })
@@ -30,7 +33,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Location", new { @class = "control-label" })
+                                    @*@Html.Label("Location", new { @class = "control-label" })*@
+                                    <label class="control-label">Location</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                         @Html.TextBox("Location", null, new { id = "Location", @class = "form-control", @readonly = "readonly" })
@@ -38,7 +42,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Data", new { @class = "control-label" })
+                                    @*@Html.Label("Data", new { @class = "control-label" })*@
+                                    @Html.DisplayName("Data")
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-menu-hamburger"></i></span>
                                         @Html.TextBox("Data", null, new { id = "Data", @class = "form-control", @readonly = "readonly" })
@@ -46,7 +51,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Format", new { @class = "control-label" })
+                                    @*@Html.Label("Format", new { @class = "control-label" })*@
+                                    <label class="control-label">Format</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-eye-open"></i></span>
                                         @Html.TextBox("Format", null, new { id = "Format", @class = "form-control", @readonly = "readonly" })
@@ -61,7 +67,8 @@
                         <div class="panel-body">
                             <fieldset id="modaloptionColumn2" disabled>
                                 <div class="form-group">
-                                    @Html.Label("TopicUserId", new { @class = "control-label" })
+                                    @*@Html.Label("TopicUserId", new { @class = "control-label" })*@
+                                    <label class="control-label">TopicUserId</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
                                         @Html.TextBox("TopicUserId", null, new { id = "TopicUserId", @class = "form-control" })
@@ -69,7 +76,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("TopicId", new { @class = "control-label" })
+                                    @*@Html.Label("TopicId", new { @class = "control-label" })*@
+                                    <label class="control-label">TopicId</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-text-size "></i></span>
                                         @Html.TextBox("TopicId", null, new { id = "TopicId", @class = "form-control" })
@@ -78,7 +86,8 @@
 
 
                                 <div class="form-group">
-                                    @Html.Label("SortOrder", new { @class = "control-label" })
+                                    @*@Html.Label("SortOrder", new { @class = "control-label" })*@
+                                    <label class="control-label">SortOrder</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-sort-by-order"></i></span>
                                         @Html.TextBox("SortOrder", null, new { id = "SortOrder", @class = "form-control" })
@@ -86,7 +95,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Datau", new { @class = "control-label" })
+                                    @*@Html.Label("Datau", new { @class = "control-label" })*@
+                                    <label class="control-label">DataU</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-menu-hamburger"></i></span>
                                         @Html.TextBox("Datau", null, new { id = "Datau", @class = "form-control" })

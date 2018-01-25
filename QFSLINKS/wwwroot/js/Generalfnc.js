@@ -1,7 +1,7 @@
 ﻿var OptionsAjax = {
         url: '',
         type: 'GET',
-        contentType: 'application/json',
+        //contentType: 'application/json',
         data: ''
     };
 function AddRow(f1, f2, nn)
@@ -13,7 +13,7 @@ function AddRow(f1, f2, nn)
     var searchString = f1;
     var sortOrder;
     var tt = '<form action="/Home/AddUser?sortOrder=' + sortOrder + '&=currentFilter' + currentFilter + '&searchString=' + searchString + '&Page=' + page + '" method="get">';
-    $('#UserTable > tbody:first-child').append('<form action="./Home/AddUser?sortOrder=' + sortOrder + '&=currentFilter' + currentFilter + '&searchString=' + searchString + '&Page=' + page + '" method="get">' +
+    $('#UserTable > tbody:first-child').append('<form action="/Home/AddUser?sortOrder=' + sortOrder + '&=currentFilter' + currentFilter + '&searchString=' + searchString + '&Page=' + page + '" method="get">' +
         '<tr>' +
     '<td>' +
         '<input id="txtusername" type="textbox" value="" placeholder = "e.g aranglew"/>' +
@@ -117,19 +117,20 @@ function ShowUserDetails(operation, button) {
     //})
 }
 function SaveUser() {
+
     var userDTO = {
         username: $('#username').val(),
         data: $('#userdata').val(),
         division: $('#division').val(),
         location: $('#location').val(),
-        TopicID : $('#topicid').val(),
+        TopicID: $('#topicid').val(),
         TopicUserID: $('#topicuserid').val(),
         UserEmail: $('#email').val(),
         UserInitials: $('#initials').val(),
         UserPhone: $('#phone').val(),
         Access: $('#Access').val(),
-        Accessa:$('#Accessa').val(),
-        vimsaccess:$('#vimsaccess').val(),
+        Accessa: $('#Accessa').val(),
+        vimsaccess: $('#vimsaccess').val(),
         vimsdelegate: $('#vimsdelegate').prop('checked'),
         vimsvisible: $('#vimsvisible').prop('checked')
     };
@@ -144,14 +145,14 @@ function SaveUser() {
 }
 function GetDivisionList(CurrentDivision) {
     $.ajax({
-        url: './Home/GetDivisionList/',
+        url: '/Home/GetDivisionList/',
         type: "GET",
         dataType: "json",
         contentType: "application/json;",
         success: function (resultD) {
 
             var options = "";
-            if (CurrentDivision.length < 1) {
+            if (CurrentDivision != null && CurrentDivision.length < 1) {
                 options += '<option value ="Select a Division" disabled selected> Select Division </option>';
             }
             var existdivision = false;
@@ -172,7 +173,7 @@ function GetDivisionList(CurrentDivision) {
 }
 function GetUserList(CurrentUser, CurrentDivision) {
     $.ajax({
-        url: './Home/GetUserList/',
+        url: '/Home/GetUserList/',
         type: "GET",
         data: {division: CurrentDivision},
         dataType: "json",
@@ -200,10 +201,11 @@ function Newuser(userDTO) {
     userDTO.TopicUserID = 1;
     userDTO.TopicID = 0;
     $.ajax({
-        url: './Home/AddUserAjax/',
+        url: '/Home/AddUserAjax/',
         type: "POST",
-        contentType: "application/json;",
-        data: JSON.stringify({ New_user: userDTO }),
+        //contentType: "application/json; charset=utf-8",
+        //data: JSON.stringify({ New_user: userDTO }),
+        data: userDTO,
         success: function (result) {
             $('#myModal').modal('hide');
             $('#SearchString').val(userDTO.UserName);
@@ -217,8 +219,7 @@ function Newuser(userDTO) {
 }
 function GetDetailbyUser(recipient, myhandler) {
     $.ajax({
-        url: './Home/DetailsbyUser',
-        //async: false,
+        url: '/Home/DetailsbyUser',        
         type: "GET",
         dataType: "json",
         contentType: "application/json;",
@@ -233,13 +234,15 @@ function GetDetailbyUser(recipient, myhandler) {
 }
 function EditUser(userDTO) {
     $.ajax({
-        url: './Home/EditUser/',
+        url: '/Home/EditUser/',
         type: "POST",
-        contentType: "application/json;",
-        data: JSON.stringify({ Edit_user: userDTO }),
+        //contentType: "application/json;",
+        //data: JSON.stringify({ Edit_user: userDTO }),
+        data: userDTO,
         success: function (result) {
             $('#myModal').modal('hide');
-            window.location.reload();
+            //window.location.reload();
+            window.location = window.location.href;
         },
         error: function () {
             alert("Error saving user data");
@@ -262,7 +265,7 @@ function GetNextRow(result) {
 }
 function GetMenuOptionsbyUser(recipient, result) {
     $.ajax({
-        url: './Home/Details/',
+        url: '/Home/Details/',
         //async: false,
         type: "GET",
         dataType: "json",
@@ -311,7 +314,7 @@ function NewUserLink(operation, button) {
 }
 function GetAllLinks() {    
     $.ajax({
-        url: './GetAllLinks',
+        url: '/Home/GetAllLinks',
         //async: false,
         type: "GET",
         dataType: "json",
@@ -319,7 +322,8 @@ function GetAllLinks() {
         success: function (resultD) {
             var options = "";            
             for (var i = 0; i < resultD.length; i++) {
-                options += '<option value ="' + resultD[i].Value+ '">' + resultD[i].Text + '</option>';
+                options += '<option value ="' + resultD[i].TopicId + '">' + resultD[i].Description + '</option>';
+                //options += '<option value ="' + resultD[i].Value + '">' + resultD[i].Text + '</option>';
             }
             $("#NewLink").empty();
             $("#NewLink").append(options);
@@ -335,10 +339,11 @@ function SaveUserLink() {
         Username: $('#CurrentUser').val()
     };
     $.ajax({
-        url: './Home/AddUserLinkAjax/',
+        url: '/Home/AddUserLinkAjax/',
         type: "POST",
-        contentType: "application/json;",
-        data: JSON.stringify({ DTO_Link: DTO_menubyuser })
+        //contentType: "application/json;",
+        //data: JSON.stringify({ DTO_Link: DTO_menubyuser })
+        data: { DTO_Link: DTO_menubyuser }
     })
     .done(function (result) {
         $('#NewUserLink').modal('hide');
@@ -353,23 +358,25 @@ function SaveUserLink() {
     });
 }
 function CopyUser() {
-    //Get Current User
-    //Get New User
-    //Call Api to copy all links from one user to the other.
     var CurrentUser = $('#username').val();
     var CopyTouser = $('#CopyTousername option:selected').text();
     if (CopyTouser) {
         $.ajax({
-            url: './Home/CopyUserLinks/',
+            url: '/Home/CopyUserLinks/',
             type: "POST",
-            contentType: "application/json;",
-            data: JSON.stringify({ currentuser: CurrentUser, copyTo: CopyTouser }),
+            //contentType: "application/json;",
+            //data: JSON.stringify({ currentuser: CurrentUser, copyTo: CopyTouser }),
+            data: { currentuser: CurrentUser, copyTo: CopyTouser },
             success: function (result) {
                 $('#myModal').modal('hide');
                 window.location.reload();
             },
-            error: function () {
+            error: function (response, textStatus, errorThrow) {
                 alert("Error saving user data");
+                alert(response.statusText);
+                alert(textStatus);
+                alert(errorThrow);
+
             }
         });
     }
@@ -422,7 +429,7 @@ function ShowOptionDetail(operation, button) {
     }
 function GetLinkById(TopicuserId, username,myfunction) {
 $.ajax({
-    url: './GetLinkById',
+    url: '/Home/GetLinkById',
     type: "GET",
     dataType: "json",
     contentType: "application/json;",
@@ -436,28 +443,39 @@ $.ajax({
 });
 }
 function SaveUserOption() {
-    var DTOmenubyuser = {
+    var DTO_menubyuser = {
         TopicUserID: parseInt($('#TopicUserId').val()),
         TopicId: parseInt($('#TopicId').val()),
         Username: $('#CurrentUser').val(),
         SortOrder: $('#SortOrder').val(),
         DataU: $('#Datau').val()
     };
-    OptionsAjax.type = 'POST';
-    OptionsAjax.data = DTOmenubyuser;    
-    // The text button changed to Yes when the option is delete user link
-    if ($("#savebuttonO").text() === "YES") {OptionsAjax.url = './Home/DeleteUserLink/';}
-    else { OptionsAjax.url = './Home/EditUserLink/'; } //Edit User Link
-    AjaxRequest(OptionsAjax);
-    $('#OptionModal').modal('hide');
-    window.location.reload();
+    var theLink = '';
+    if ($("#savebuttonO").text() === "YES") { theLink = '/Home/DeleteUserLink/'; }
+    else { theLink = '/Home/EditUserLink/'; } //Edit User Link
+
+    $.ajax({
+        url: theLink,
+        type: "POST",
+        data: { data: DTO_menubyuser }
+    })
+        .done(function (result) {
+            $('#OptionModal').modal('hide');
+            window.location.reload();
+        })
+        .fail(function (response, textStatus, errorThrown) {
+            $('#OptionModal').modal('hide');
+            alert("Error saving user data");           
+            window.location.reload();
+        });
 }
 function AjaxRequest(Options) {
     $.ajax({
         url: Options.url,
         type: Options.type,
-        contentType: Options.contentType,
-        data: JSON.stringify({ data: Options.data }),
+        //contentType: Options.contentType,
+        //data: JSON.stringify({ data: Options.data }),        
+        data: { data: Options.data },
         success: function (result) {
         },
         error: function (response, textStatus, errorThrown) {
@@ -470,8 +488,9 @@ function AjaxRequest(Options,myfunction) {
     $.ajax({
         url: Options.url,
         type: Options.type,
-        contentType: Options.contentType,
-        data: JSON.stringify({ data: Options.data }),
+        //contentType: Options.contentType,
+        //data: JSON.stringify({ data: Options.data }),
+        data: { data: Options.data },
         success: function (result) {
             myfunction(result);
         },        
@@ -539,7 +558,7 @@ function GetLinkDetails(ThisTopic,myfunction) {
         Format: $('#format').val(),
         Detail: $('#detail').val()
     };
-    OptionsAjax.url = './GetSingleLink';
+    OptionsAjax.url = '/GetSingleLink';
     OptionsAjax.type = 'POST';
     OptionsAjax.data = DTOMenuLink;
     AjaxRequest(OptionsAjax, myfunction);
@@ -565,7 +584,7 @@ function SaveLinkChanges() {
     }
     else {
         //EditDataLink(DTOMenuLink);
-        OptionsAjax.url = './EditDataLink';
+        OptionsAjax.url = '/EditDataLink';
         OptionsAjax.type = 'POST';
         OptionsAjax.data = DTOMenuLink;
         AjaxRequest(OptionsAjax);

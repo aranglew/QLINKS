@@ -1,0 +1,946 @@
+// Decompiled with JetBrains decompiler
+// Type: QFSLINKS.Controllers.HomeController
+// Assembly: QFSLINKS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 73790389-7BBB-4C8E-B4E3-86632306709F
+// Assembly location: E:\QFSLINKS.dll
+
+using Microsoft.CSharp.RuntimeBinder;
+using PagedList;
+using QFSLINKS.Models;SS
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
+using System.Web.Configuration;
+using System.Web.Mvc;
+
+namespace QFSLINKS.Controllers
+{
+  public class HomeController : Controller
+  {
+    private VisyPackMTEntities _context { get; set; }
+
+    public HomeController(VisyPackMTEntities context)
+    {
+      this.\u002Ector();
+      this._context = context;
+    }
+
+    public ActionResult Index()
+    {
+      try
+      {
+        return (ActionResult) this.View((object) ((IQueryable<SDR_QFS_DataU>) this._context.SDR_QFS_DataU).Where<SDR_QFS_DataU>((Expression<Func<SDR_QFS_DataU, bool>>) (p => (double) p.TopicID == 1.5)).ToList<SDR_QFS_DataU>());
+      }
+      catch (Exception ex)
+      {
+        this.get_Response().StatusCode = 404;
+        // ISSUE: reference to a compiler-generated field
+        if (HomeController.\u003C\u003Eo__5.\u003C\u003Ep__0 == null)
+        {
+          // ISSUE: reference to a compiler-generated field
+          HomeController.\u003C\u003Eo__5.\u003C\u003Ep__0 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "MyError", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+          {
+            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+          }));
+        }
+        // ISSUE: reference to a compiler-generated field
+        // ISSUE: reference to a compiler-generated field
+        object obj1 = HomeController.\u003C\u003Eo__5.\u003C\u003Ep__0.Target((CallSite) HomeController.\u003C\u003Eo__5.\u003C\u003Ep__0, ((ControllerBase) this).get_ViewBag(), ex.Message);
+        int fileLineNumber = new StackTrace(ex, true).GetFrame(0).GetFileLineNumber();
+        // ISSUE: reference to a compiler-generated field
+        if (HomeController.\u003C\u003Eo__5.\u003C\u003Ep__1 == null)
+        {
+          // ISSUE: reference to a compiler-generated field
+          HomeController.\u003C\u003Eo__5.\u003C\u003Ep__1 = CallSite<Func<CallSite, object, int, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "MyLine", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+          {
+            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+          }));
+        }
+        // ISSUE: reference to a compiler-generated field
+        // ISSUE: reference to a compiler-generated field
+        object obj2 = HomeController.\u003C\u003Eo__5.\u003C\u003Ep__1.Target((CallSite) HomeController.\u003C\u003Eo__5.\u003C\u003Ep__1, ((ControllerBase) this).get_ViewBag(), fileLineNumber);
+        return (ActionResult) this.View("Error");
+      }
+    }
+
+    public ActionResult UserList(string sortOrder, string currentFilter, string searchString, int? page)
+    {
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__6.\u003C\u003Ep__0 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__6.\u003C\u003Ep__0 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "CurrentSort", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj1 = HomeController.\u003C\u003Eo__6.\u003C\u003Ep__0.Target((CallSite) HomeController.\u003C\u003Eo__6.\u003C\u003Ep__0, ((ControllerBase) this).get_ViewBag(), sortOrder);
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__6.\u003C\u003Ep__1 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__6.\u003C\u003Ep__1 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "NameSortParm", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj2 = HomeController.\u003C\u003Eo__6.\u003C\u003Ep__1.Target((CallSite) HomeController.\u003C\u003Eo__6.\u003C\u003Ep__1, ((ControllerBase) this).get_ViewBag(), string.IsNullOrEmpty(sortOrder) ? "name_desc" : "");
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__6.\u003C\u003Ep__2 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__6.\u003C\u003Ep__2 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "DataSortParm", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj3 = HomeController.\u003C\u003Eo__6.\u003C\u003Ep__2.Target((CallSite) HomeController.\u003C\u003Eo__6.\u003C\u003Ep__2, ((ControllerBase) this).get_ViewBag(), sortOrder == "fn_desc" ? "fn_asc" : "fn_desc");
+      if (searchString != null)
+        page = new int?(1);
+      else
+        searchString = currentFilter;
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__6.\u003C\u003Ep__3 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__6.\u003C\u003Ep__3 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "CurrentFilter", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj4 = HomeController.\u003C\u003Eo__6.\u003C\u003Ep__3.Target((CallSite) HomeController.\u003C\u003Eo__6.\u003C\u003Ep__3, ((ControllerBase) this).get_ViewBag(), searchString);
+      IQueryable<SDR_QFS_DataU> source = ((IQueryable<SDR_QFS_DataU>) this._context.SDR_QFS_DataU).Where<SDR_QFS_DataU>((Expression<Func<SDR_QFS_DataU, bool>>) (p => p.TopicID == 0 && !p.UserName.Contains("Imported")));
+      if (!string.IsNullOrEmpty(searchString))
+        source = source.Where<SDR_QFS_DataU>((Expression<Func<SDR_QFS_DataU, bool>>) (s => s.UserName.Contains(searchString) || s.Data.Contains(searchString)));
+      IQueryable<SDR_QFS_DataU> queryable;
+      if (!(sortOrder == "name_desc"))
+      {
+        if (!(sortOrder == "fn_desc"))
+        {
+          if (sortOrder == "fn_asc")
+            queryable = (IQueryable<SDR_QFS_DataU>) source.OrderBy<SDR_QFS_DataU, string>((Expression<Func<SDR_QFS_DataU, string>>) (a => a.Data));
+          else
+            queryable = (IQueryable<SDR_QFS_DataU>) source.OrderBy<SDR_QFS_DataU, string>((Expression<Func<SDR_QFS_DataU, string>>) (a => a.UserName));
+        }
+        else
+          queryable = (IQueryable<SDR_QFS_DataU>) source.OrderByDescending<SDR_QFS_DataU, string>((Expression<Func<SDR_QFS_DataU, string>>) (a => a.Data));
+      }
+      else
+        queryable = (IQueryable<SDR_QFS_DataU>) source.OrderByDescending<SDR_QFS_DataU, string>((Expression<Func<SDR_QFS_DataU, string>>) (a => a.UserName));
+      int num1 = 20;
+      int num2 = page ?? 1;
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__6.\u003C\u003Ep__4 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__6.\u003C\u003Ep__4 = CallSite<Func<CallSite, object, SelectList, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "DivisionList", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj5 = HomeController.\u003C\u003Eo__6.\u003C\u003Ep__4.Target((CallSite) HomeController.\u003C\u003Eo__6.\u003C\u003Ep__4, ((ControllerBase) this).get_ViewBag(), new SelectList((IEnumerable) this._context.SDR_QFS_Division, "Id", "DivisionName"));
+      return (ActionResult) this.View((object) PagedListExtensions.ToPagedList<SDR_QFS_DataU>((IQueryable<M0>) queryable, num2, num1));
+    }
+
+    public ActionResult Contact()
+    {
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__7.\u003C\u003Ep__0 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__7.\u003C\u003Ep__0 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "Message", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.Constant, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj = HomeController.\u003C\u003Eo__7.\u003C\u003Ep__0.Target((CallSite) HomeController.\u003C\u003Eo__7.\u003C\u003Ep__0, ((ControllerBase) this).get_ViewBag(), "Links");
+      return (ActionResult) this.View();
+    }
+
+    public JsonResult DetailsbyUser(string UserName)
+    {
+      if (string.IsNullOrEmpty(UserName))
+        return this.Json((object) null, (JsonRequestBehavior) 0);
+      return this.Json((object) ((IQueryable<SDR_QFS_DataU>) this._context.SDR_QFS_DataU).Where<SDR_QFS_DataU>((Expression<Func<SDR_QFS_DataU, bool>>) (p => p.TopicID == 0 && p.UserName == UserName)), (JsonRequestBehavior) 0);
+    }
+
+    public JsonResult Details(string SearchParam, int CurrentPage, string CurrentFilter)
+    {
+      if (string.IsNullOrEmpty(SearchParam))
+        return this.Json((object) null, (JsonRequestBehavior) 0);
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__9.\u003C\u003Ep__0 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__9.\u003C\u003Ep__0 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "Message", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.Constant, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj1 = HomeController.\u003C\u003Eo__9.\u003C\u003Ep__0.Target((CallSite) HomeController.\u003C\u003Eo__9.\u003C\u003Ep__0, ((ControllerBase) this).get_ViewBag(), nameof (Details));
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__9.\u003C\u003Ep__1 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__9.\u003C\u003Ep__1 = CallSite<Func<CallSite, object, int, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "page", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj2 = HomeController.\u003C\u003Eo__9.\u003C\u003Ep__1.Target((CallSite) HomeController.\u003C\u003Eo__9.\u003C\u003Ep__1, ((ControllerBase) this).get_ViewBag(), CurrentPage);
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__9.\u003C\u003Ep__2 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__9.\u003C\u003Ep__2 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, nameof (CurrentFilter), typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj3 = HomeController.\u003C\u003Eo__9.\u003C\u003Ep__2.Target((CallSite) HomeController.\u003C\u003Eo__9.\u003C\u003Ep__2, ((ControllerBase) this).get_ViewBag(), CurrentFilter);
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__9.\u003C\u003Ep__3 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__9.\u003C\u003Ep__3 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "CurrentUser", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj4 = HomeController.\u003C\u003Eo__9.\u003C\u003Ep__3.Target((CallSite) HomeController.\u003C\u003Eo__9.\u003C\u003Ep__3, ((ControllerBase) this).get_ViewBag(), SearchParam);
+      List<DTO_menubyuser> list = ((IEnumerable<DTO_menubyuser>) this._context.get_Database().SqlQuery<DTO_menubyuser>("Exec dbo.SDR_QFS_MenuSP @UserNameFilter", new object[1]
+      {
+        (object) new SqlParameter("@UserNameFilter", (object) SearchParam)
+      })).ToList<DTO_menubyuser>();
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__9.\u003C\u003Ep__4 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__9.\u003C\u003Ep__4 = CallSite<Func<CallSite, object, int, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "TotalRecords", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj5 = HomeController.\u003C\u003Eo__9.\u003C\u003Ep__4.Target((CallSite) HomeController.\u003C\u003Eo__9.\u003C\u003Ep__4, ((ControllerBase) this).get_ViewBag(), list.Count);
+      return this.Json((object) list, (JsonRequestBehavior) 0);
+    }
+
+    public ActionResult Detailsview(string SearchParam, int CurrentPage, string CurrentFilter)
+    {
+      if (string.IsNullOrEmpty(SearchParam))
+        return (ActionResult) this.View("Details");
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__10.\u003C\u003Ep__0 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__10.\u003C\u003Ep__0 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "Message", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.Constant, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj1 = HomeController.\u003C\u003Eo__10.\u003C\u003Ep__0.Target((CallSite) HomeController.\u003C\u003Eo__10.\u003C\u003Ep__0, ((ControllerBase) this).get_ViewBag(), "Details");
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__10.\u003C\u003Ep__1 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__10.\u003C\u003Ep__1 = CallSite<Func<CallSite, object, int, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "page", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj2 = HomeController.\u003C\u003Eo__10.\u003C\u003Ep__1.Target((CallSite) HomeController.\u003C\u003Eo__10.\u003C\u003Ep__1, ((ControllerBase) this).get_ViewBag(), CurrentPage);
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__10.\u003C\u003Ep__2 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__10.\u003C\u003Ep__2 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, nameof (CurrentFilter), typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj3 = HomeController.\u003C\u003Eo__10.\u003C\u003Ep__2.Target((CallSite) HomeController.\u003C\u003Eo__10.\u003C\u003Ep__2, ((ControllerBase) this).get_ViewBag(), CurrentFilter);
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__10.\u003C\u003Ep__3 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__10.\u003C\u003Ep__3 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "CurrentUser", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj4 = HomeController.\u003C\u003Eo__10.\u003C\u003Ep__3.Target((CallSite) HomeController.\u003C\u003Eo__10.\u003C\u003Ep__3, ((ControllerBase) this).get_ViewBag(), SearchParam);
+      List<DTO_menubyuser> list = ((IEnumerable<DTO_menubyuser>) this._context.get_Database().SqlQuery<DTO_menubyuser>("Exec dbo.SDR_QFS_MenuByUser @UserNameFilter", new object[1]
+      {
+        (object) new SqlParameter("@UserNameFilter", (object) SearchParam)
+      })).ToList<DTO_menubyuser>();
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__10.\u003C\u003Ep__4 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__10.\u003C\u003Ep__4 = CallSite<Func<CallSite, object, int, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "TotalRecords", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj5 = HomeController.\u003C\u003Eo__10.\u003C\u003Ep__4.Target((CallSite) HomeController.\u003C\u003Eo__10.\u003C\u003Ep__4, ((ControllerBase) this).get_ViewBag(), list.Count);
+      return (ActionResult) this.View("Details", (object) list);
+    }
+
+    public ActionResult EditUser(string SearchParam, int CurrentPage, string CurrentFilter)
+    {
+      if (string.IsNullOrEmpty(SearchParam))
+        return (ActionResult) this.View();
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__11.\u003C\u003Ep__0 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__11.\u003C\u003Ep__0 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "Message", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.Constant, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj1 = HomeController.\u003C\u003Eo__11.\u003C\u003Ep__0.Target((CallSite) HomeController.\u003C\u003Eo__11.\u003C\u003Ep__0, ((ControllerBase) this).get_ViewBag(), nameof (EditUser));
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__11.\u003C\u003Ep__1 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__11.\u003C\u003Ep__1 = CallSite<Func<CallSite, object, int, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "page", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj2 = HomeController.\u003C\u003Eo__11.\u003C\u003Ep__1.Target((CallSite) HomeController.\u003C\u003Eo__11.\u003C\u003Ep__1, ((ControllerBase) this).get_ViewBag(), CurrentPage);
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__11.\u003C\u003Ep__2 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__11.\u003C\u003Ep__2 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, nameof (CurrentFilter), typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj3 = HomeController.\u003C\u003Eo__11.\u003C\u003Ep__2.Target((CallSite) HomeController.\u003C\u003Eo__11.\u003C\u003Ep__2, ((ControllerBase) this).get_ViewBag(), CurrentFilter);
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__11.\u003C\u003Ep__3 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__11.\u003C\u003Ep__3 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, nameof (SearchParam), typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj4 = HomeController.\u003C\u003Eo__11.\u003C\u003Ep__3.Target((CallSite) HomeController.\u003C\u003Eo__11.\u003C\u003Ep__3, ((ControllerBase) this).get_ViewBag(), SearchParam);
+      List<DTO_user> list = ((IEnumerable<DTO_user>) this._context.get_Database().SqlQuery<DTO_user>("Exec SDR_QFS_userByUsername @UserNameFilter", new object[1]
+      {
+        (object) new SqlParameter("@UserNameFilter", (object) SearchParam)
+      })).ToList<DTO_user>();
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__11.\u003C\u003Ep__4 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__11.\u003C\u003Ep__4 = CallSite<Func<CallSite, object, SelectList, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "DivisionList", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj5 = HomeController.\u003C\u003Eo__11.\u003C\u003Ep__4.Target((CallSite) HomeController.\u003C\u003Eo__11.\u003C\u003Ep__4, ((ControllerBase) this).get_ViewBag(), new SelectList((IEnumerable) this._context.SDR_QFS_Division, "DivisionName", "DivisionName", (object) list.First<DTO_user>().Division));
+      return (ActionResult) this.View(nameof (EditUser), (object) list);
+    }
+
+    [HttpPost]
+    public ActionResult EditUser(DTO_user Edit_user)
+    {
+      if (!this.get_ModelState().get_IsValid())
+        return (ActionResult) this.View("UserList", (object) Edit_user);
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__12.\u003C\u003Ep__0 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__12.\u003C\u003Ep__0 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "Message", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.Constant, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj = HomeController.\u003C\u003Eo__12.\u003C\u003Ep__0.Target((CallSite) HomeController.\u003C\u003Eo__12.\u003C\u003Ep__0, ((ControllerBase) this).get_ViewBag(), nameof (EditUser));
+      if (!string.IsNullOrEmpty(Edit_user.UserName))
+      {
+        SDR_QFS_DataU sdrQfsDataU = this._context.SDR_QFS_DataU.Find(new object[1]
+        {
+          (object) Edit_user.TopicUserID
+        });
+        sdrQfsDataU.UserName = Edit_user.UserName.Trim();
+        sdrQfsDataU.Data = Edit_user.Data;
+        sdrQfsDataU.Location = Edit_user.Location;
+        sdrQfsDataU.Division = Edit_user.Division;
+        sdrQfsDataU.UserInitials = Edit_user.UserInitials;
+        sdrQfsDataU.UserEmail = Edit_user.UserEmail;
+        sdrQfsDataU.Access = Edit_user.Access;
+        sdrQfsDataU.AccessA = Edit_user.AccessA;
+        sdrQfsDataU.UserPhone = Edit_user.UserPhone;
+        sdrQfsDataU.VimsVisible = new int?(Edit_user.VimsVisible == "True" ? 1 : 0);
+        sdrQfsDataU.VimsDelegate = new int?(Edit_user.VimsDelegate == "True" ? 1 : 0);
+        sdrQfsDataU.VimsAccess = Edit_user.VimsAccess;
+        this._context.SaveChanges();
+      }
+      return (ActionResult) this.RedirectToAction("UserList", (object) new
+      {
+        sortOrder = "",
+        currentFilter = Edit_user.UserName,
+        searchString = Edit_user.UserName
+      });
+    }
+
+    [HttpPost]
+    public ActionResult AddUserAjax(DTO_user New_user)
+    {
+      if (!this.get_ModelState().get_IsValid())
+        return (ActionResult) this.View("UserList", (object) New_user);
+      SDR_QFS_DataU sdrQfsDataU = new SDR_QFS_DataU();
+      if (!string.IsNullOrEmpty(New_user.UserName))
+      {
+        sdrQfsDataU.UserName = New_user.UserName.Trim();
+        sdrQfsDataU.Data = New_user.Data;
+        sdrQfsDataU.Location = New_user.Location;
+        sdrQfsDataU.UserInitials = New_user.UserInitials;
+        sdrQfsDataU.TopicID = 0;
+        sdrQfsDataU.Division = New_user.Division;
+        sdrQfsDataU.UserEmail = New_user.UserEmail;
+        sdrQfsDataU.VimsVisible = new int?(New_user.VimsVisible == "true" ? 1 : 0);
+        sdrQfsDataU.VimsDelegate = new int?(New_user.VimsDelegate == "true" ? 1 : 0);
+        sdrQfsDataU.VimsAccess = New_user.VimsAccess;
+        this._context.SDR_QFS_DataU.Add(sdrQfsDataU);
+        try
+        {
+          this._context.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+          Console.WriteLine(ex.Message);
+        }
+      }
+      return (ActionResult) this.RedirectToAction("UserList", (object) new
+      {
+        sortOrder = "",
+        currentFilter = New_user.UserName,
+        searchString = New_user.UserName,
+        New_user = New_user
+      });
+    }
+
+    public ActionResult MenuItem(string sortOrder, string currentFilter, string searchString, int? page)
+    {
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__14.\u003C\u003Ep__0 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__14.\u003C\u003Ep__0 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "CurrentSort", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj1 = HomeController.\u003C\u003Eo__14.\u003C\u003Ep__0.Target((CallSite) HomeController.\u003C\u003Eo__14.\u003C\u003Ep__0, ((ControllerBase) this).get_ViewBag(), sortOrder);
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__14.\u003C\u003Ep__1 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__14.\u003C\u003Ep__1 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "NameSortParm", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj2 = HomeController.\u003C\u003Eo__14.\u003C\u003Ep__1.Target((CallSite) HomeController.\u003C\u003Eo__14.\u003C\u003Ep__1, ((ControllerBase) this).get_ViewBag(), string.IsNullOrEmpty(sortOrder) ? "topicid_desc" : "");
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__14.\u003C\u003Ep__2 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__14.\u003C\u003Ep__2 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "DataSortParm", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj3 = HomeController.\u003C\u003Eo__14.\u003C\u003Ep__2.Target((CallSite) HomeController.\u003C\u003Eo__14.\u003C\u003Ep__2, ((ControllerBase) this).get_ViewBag(), sortOrder == "fn_desc" ? "fn_asc" : "fn_desc");
+      string[] strArray = WebConfigurationManager.AppSettings["LinkType"].Split(',');
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__14.\u003C\u003Ep__3 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__14.\u003C\u003Ep__3 = CallSite<Func<CallSite, object, string[], object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "LinkType", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj4 = HomeController.\u003C\u003Eo__14.\u003C\u003Ep__3.Target((CallSite) HomeController.\u003C\u003Eo__14.\u003C\u003Ep__3, ((ControllerBase) this).get_ViewBag(), strArray);
+      if (searchString != null)
+        page = new int?(1);
+      else
+        searchString = currentFilter;
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__14.\u003C\u003Ep__4 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__14.\u003C\u003Ep__4 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "CurrentFilter", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj5 = HomeController.\u003C\u003Eo__14.\u003C\u003Ep__4.Target((CallSite) HomeController.\u003C\u003Eo__14.\u003C\u003Ep__4, ((ControllerBase) this).get_ViewBag(), searchString);
+      int enteredNumber;
+      bool flag = int.TryParse(searchString, out enteredNumber);
+      IQueryable<SDR_QFS_Data> source = ((IQueryable<SDR_QFS_Data>) this._context.SDR_QFS_Data).Where<SDR_QFS_Data>((Expression<Func<SDR_QFS_Data, bool>>) (p => p.TopicID != (int?) 0));
+      source.Count<SDR_QFS_Data>();
+      if (!string.IsNullOrEmpty(searchString))
+      {
+        if (flag)
+          source = source.Where<SDR_QFS_Data>((Expression<Func<SDR_QFS_Data, bool>>) (s => s.TopicID == (int?) enteredNumber));
+        else
+          source = source.Where<SDR_QFS_Data>((Expression<Func<SDR_QFS_Data, bool>>) (s => s.Description.Contains(searchString) || s.Data.Contains(searchString)));
+      }
+      IQueryable<SDR_QFS_Data> queryable;
+      if (!(sortOrder == "topicid_desc"))
+      {
+        if (!(sortOrder == "fn_desc"))
+        {
+          if (sortOrder == "fn_asc")
+            queryable = (IQueryable<SDR_QFS_Data>) source.OrderBy<SDR_QFS_Data, string>((Expression<Func<SDR_QFS_Data, string>>) (a => a.Data));
+          else
+            queryable = (IQueryable<SDR_QFS_Data>) source.OrderBy<SDR_QFS_Data, int?>((Expression<Func<SDR_QFS_Data, int?>>) (a => a.TopicID));
+        }
+        else
+          queryable = (IQueryable<SDR_QFS_Data>) source.OrderByDescending<SDR_QFS_Data, string>((Expression<Func<SDR_QFS_Data, string>>) (a => a.Data));
+      }
+      else
+        queryable = (IQueryable<SDR_QFS_Data>) source.OrderByDescending<SDR_QFS_Data, int?>((Expression<Func<SDR_QFS_Data, int?>>) (a => a.TopicID));
+      int num1 = 20;
+      int num2 = page ?? 1;
+      return (ActionResult) this.View((object) PagedListExtensions.ToPagedList<SDR_QFS_Data>((IQueryable<M0>) queryable, num2, num1));
+    }
+
+    public ActionResult AddItem(DTO_MenuItem newMenuitem, string Hsearch, string Hsortname, string Hsortdata, int Hpage)
+    {
+      SDR_QFS_Data sdrQfsData1 = new SDR_QFS_Data();
+      if (!string.IsNullOrEmpty(newMenuitem.TopicID.ToString()))
+      {
+        sdrQfsData1.TopicID = new int?(newMenuitem.TopicID);
+        sdrQfsData1.Description = newMenuitem.Description;
+        sdrQfsData1.Type = newMenuitem.Type;
+        sdrQfsData1.Location = newMenuitem.Location;
+        sdrQfsData1.Data = newMenuitem.Data;
+        sdrQfsData1.Format = newMenuitem.Format;
+        sdrQfsData1.Detail = newMenuitem.Detail;
+        SDR_QFS_Data sdrQfsData2 = sdrQfsData1;
+        int? sortOrder = newMenuitem.sortOrder;
+        Decimal? nullable = sortOrder.HasValue ? new Decimal?((Decimal) sortOrder.GetValueOrDefault()) : new Decimal?();
+        sdrQfsData2.SortOrder = nullable;
+        this._context.SDR_QFS_Data.Add(sdrQfsData1);
+        try
+        {
+          this._context.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+          Console.WriteLine(ex.Message);
+        }
+      }
+      return (ActionResult) this.RedirectToAction("MenuItem", (object) new
+      {
+        sortOrder = Hsortname,
+        currentFilter = newMenuitem.Description
+      });
+    }
+
+    public JsonResult GetDivisionList()
+    {
+      return this.Json((object) ((IQueryable<SDR_QFS_Division>) this._context.SDR_QFS_Division).Select<SDR_QFS_Division, SDR_QFS_Division>((Expression<Func<SDR_QFS_Division, SDR_QFS_Division>>) (p => p)), (JsonRequestBehavior) 0);
+    }
+
+    public JsonResult GetUserList(string division)
+    {
+      return this.Json((object) ((IQueryable<SDR_QFS_DataU>) this._context.SDR_QFS_DataU).Where<SDR_QFS_DataU>((Expression<Func<SDR_QFS_DataU, bool>>) (p => p.TopicID <= 0 && !p.UserName.Contains("Imported") && p.Division == division)).OrderBy<SDR_QFS_DataU, string>((Expression<Func<SDR_QFS_DataU, string>>) (p => p.UserName)).Select<SDR_QFS_DataU, string>((Expression<Func<SDR_QFS_DataU, string>>) (p => p.UserName)), (JsonRequestBehavior) 0);
+    }
+
+    public JsonResult GetAllLinks()
+    {
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__18.\u003C\u003Ep__2 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__18.\u003C\u003Ep__2 = CallSite<Func<CallSite, object, bool>>.Create(Binder.UnaryOperation(CSharpBinderFlags.None, ExpressionType.IsTrue, typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[1]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      Func<CallSite, object, bool> target1 = HomeController.\u003C\u003Eo__18.\u003C\u003Ep__2.Target;
+      // ISSUE: reference to a compiler-generated field
+      CallSite<Func<CallSite, object, bool>> p2 = HomeController.\u003C\u003Eo__18.\u003C\u003Ep__2;
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__18.\u003C\u003Ep__1 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__18.\u003C\u003Ep__1 = CallSite<Func<CallSite, object, object, object>>.Create(Binder.BinaryOperation(CSharpBinderFlags.None, ExpressionType.Equal, typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      Func<CallSite, object, object, object> target2 = HomeController.\u003C\u003Eo__18.\u003C\u003Ep__1.Target;
+      // ISSUE: reference to a compiler-generated field
+      CallSite<Func<CallSite, object, object, object>> p1 = HomeController.\u003C\u003Eo__18.\u003C\u003Ep__1;
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__18.\u003C\u003Ep__0 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__18.\u003C\u003Ep__0 = CallSite<Func<CallSite, object, object>>.Create(Binder.GetMember(CSharpBinderFlags.None, "MyLinks", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[1]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj1 = HomeController.\u003C\u003Eo__18.\u003C\u003Ep__0.Target((CallSite) HomeController.\u003C\u003Eo__18.\u003C\u003Ep__0, ((ControllerBase) this).get_ViewBag());
+      // ISSUE: variable of the null type
+      __Null local = null;
+      object obj2 = target2((CallSite) p1, obj1, (object) local);
+      if (target1((CallSite) p2, obj2))
+      {
+        IOrderedQueryable<SDR_QFS_Data> source = ((IQueryable<SDR_QFS_Data>) this._context.SDR_QFS_Data).GroupBy<SDR_QFS_Data, int?>((Expression<Func<SDR_QFS_Data, int?>>) (g => g.TopicID)).Select<IGrouping<int?, SDR_QFS_Data>, SDR_QFS_Data>((Expression<Func<IGrouping<int?, SDR_QFS_Data>, SDR_QFS_Data>>) (se => se.FirstOrDefault<SDR_QFS_Data>())).Where<SDR_QFS_Data>((Expression<Func<SDR_QFS_Data, bool>>) (t => t.TopicID > (int?) 0)).OrderBy<SDR_QFS_Data, int?>((Expression<Func<SDR_QFS_Data, int?>>) (o => o.TopicID));
+        Func<SDR_QFS_Data, int?> func = (Func<SDR_QFS_Data, int?>) (s => s.TopicID);
+        Func<SDR_QFS_Data, int?> keySelector;
+        Dictionary<int?, string> dictionary = source.ToDictionary<SDR_QFS_Data, int?, string>(keySelector, (Func<SDR_QFS_Data, string>) (s => s.TopicID.ToString() + " " + s.Description + "[" + s.Data + "]"));
+        // ISSUE: reference to a compiler-generated field
+        if (HomeController.\u003C\u003Eo__18.\u003C\u003Ep__3 == null)
+        {
+          // ISSUE: reference to a compiler-generated field
+          HomeController.\u003C\u003Eo__18.\u003C\u003Ep__3 = CallSite<Func<CallSite, object, SelectList, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "MyLinks", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+          {
+            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+          }));
+        }
+        // ISSUE: reference to a compiler-generated field
+        // ISSUE: reference to a compiler-generated field
+        object obj3 = HomeController.\u003C\u003Eo__18.\u003C\u003Ep__3.Target((CallSite) HomeController.\u003C\u003Eo__18.\u003C\u003Ep__3, ((ControllerBase) this).get_ViewBag(), new SelectList((IEnumerable) dictionary, "Key", "Value"));
+      }
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__18.\u003C\u003Ep__6 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__18.\u003C\u003Ep__6 = CallSite<Func<CallSite, object, JsonResult>>.Create(Binder.Convert(CSharpBinderFlags.None, typeof (JsonResult), typeof (HomeController)));
+      }
+      // ISSUE: reference to a compiler-generated field
+      Func<CallSite, object, JsonResult> target3 = HomeController.\u003C\u003Eo__18.\u003C\u003Ep__6.Target;
+      // ISSUE: reference to a compiler-generated field
+      CallSite<Func<CallSite, object, JsonResult>> p6 = HomeController.\u003C\u003Eo__18.\u003C\u003Ep__6;
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__18.\u003C\u003Ep__5 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__18.\u003C\u003Ep__5 = CallSite<Func<CallSite, HomeController, object, JsonRequestBehavior, object>>.Create(Binder.InvokeMember(CSharpBinderFlags.InvokeSimpleName, "Json", (IEnumerable<Type>) null, typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[3]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.Constant, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      Func<CallSite, HomeController, object, JsonRequestBehavior, object> target4 = HomeController.\u003C\u003Eo__18.\u003C\u003Ep__5.Target;
+      // ISSUE: reference to a compiler-generated field
+      CallSite<Func<CallSite, HomeController, object, JsonRequestBehavior, object>> p5 = HomeController.\u003C\u003Eo__18.\u003C\u003Ep__5;
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__18.\u003C\u003Ep__4 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__18.\u003C\u003Ep__4 = CallSite<Func<CallSite, object, object>>.Create(Binder.GetMember(CSharpBinderFlags.None, "MyLinks", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[1]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj4 = HomeController.\u003C\u003Eo__18.\u003C\u003Ep__4.Target((CallSite) HomeController.\u003C\u003Eo__18.\u003C\u003Ep__4, ((ControllerBase) this).get_ViewBag());
+      int num = 0;
+      object obj5 = target4((CallSite) p5, this, obj4, (JsonRequestBehavior) num);
+      return target3((CallSite) p6, obj5);
+    }
+
+    [HttpPost]
+    public ActionResult AddUserLinkAjax(DTO_menubyuser DTO_Link)
+    {
+      SDR_QFS_DataU sdrQfsDataU = new SDR_QFS_DataU();
+      if (!string.IsNullOrEmpty(DTO_Link.Username))
+      {
+        sdrQfsDataU.UserName = DTO_Link.Username;
+        sdrQfsDataU.TopicID = DTO_Link.TopicId;
+        sdrQfsDataU.Data = DTO_Link.Description;
+        this._context.SDR_QFS_DataU.Add(sdrQfsDataU);
+        try
+        {
+          this._context.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+          Console.WriteLine(ex.Message);
+        }
+      }
+      return (ActionResult) this.RedirectToAction("Detailsview", (object) new
+      {
+        SearchParam = "",
+        CurrentPage = 1,
+        currentFilter = DTO_Link.Username
+      });
+    }
+
+    [HttpPost]
+    public ActionResult CopyUserLinks(string currentuser, string copyTo)
+    {
+      if (!this.get_ModelState().get_IsValid())
+        return (ActionResult) this.View("UserList", currentuser);
+      if (!string.IsNullOrEmpty(currentuser) && !string.IsNullOrEmpty(copyTo))
+        this._context.get_Database().ExecuteSqlCommand("exec dbo.SDR_QFS_CopyLinks @copyfrom, @copyto", new object[2]
+        {
+          (object) new SqlParameter("@copyfrom", (object) currentuser),
+          (object) new SqlParameter("@copyto", (object) copyTo)
+        });
+      return (ActionResult) this.RedirectToAction("UserList", (object) new
+      {
+        sortOrder = "",
+        currentFilter = copyTo,
+        searchString = copyTo
+      });
+    }
+
+    public JsonResult GetLinkById(int TopicUserId, string username)
+    {
+      return this.Json((object) ((IEnumerable<DTO_menubyuser>) this._context.get_Database().SqlQuery<DTO_menubyuser>("Exec dbo.SDR_QFS_MenuByUser @UserNameFilter", new object[1]
+      {
+        (object) new SqlParameter("@UserNameFilter", (object) username)
+      })).Where<DTO_menubyuser>((Func<DTO_menubyuser, bool>) (p => p.TopicUserID == TopicUserId)).ToList<DTO_menubyuser>(), (JsonRequestBehavior) 0);
+    }
+
+    [HttpPost]
+    public ActionResult DeleteUserLink(DTO_menubyuser data)
+    {
+      if (!this.get_ModelState().get_IsValid())
+        return (ActionResult) this.View("Detailsview", (object) data);
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__22.\u003C\u003Ep__0 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__22.\u003C\u003Ep__0 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "Message", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.Constant, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj = HomeController.\u003C\u003Eo__22.\u003C\u003Ep__0.Target((CallSite) HomeController.\u003C\u003Eo__22.\u003C\u003Ep__0, ((ControllerBase) this).get_ViewBag(), "Delete User Link");
+      if (data.TopicUserID <= 0)
+        return (ActionResult) this.View("Detailsview", (object) data);
+      SDR_QFS_DataU sdrQfsDataU = this._context.SDR_QFS_DataU.Find(new object[1]
+      {
+        (object) data.TopicUserID
+      });
+      this._context.SDR_QFS_DataU.Remove(sdrQfsDataU);
+      this._context.SaveChanges();
+      return (ActionResult) this.RedirectToAction("Detailsview", (object) new
+      {
+        SearchParam = sdrQfsDataU.UserName,
+        CurrentPage = 1,
+        currentFilter = sdrQfsDataU.UserName
+      });
+    }
+
+    [HttpPost]
+    public ActionResult EditUserLink(DTO_menubyuser data)
+    {
+      SDR_QFS_DataU sdrQfsDataU1 = new SDR_QFS_DataU();
+      SDR_QFS_DataU sdrQfsDataU2 = this._context.SDR_QFS_DataU.Find(new object[1]
+      {
+        (object) data.TopicUserID
+      });
+      if (!string.IsNullOrEmpty(data.Username))
+      {
+        sdrQfsDataU2.UserName = data.Username;
+        sdrQfsDataU2.SortOrder = data.SortOrder;
+        sdrQfsDataU2.TopicUserID = data.TopicUserID;
+        sdrQfsDataU2.Data = data.DataU;
+        sdrQfsDataU2.TopicID = data.TopicId;
+        try
+        {
+          this._context.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+          Console.WriteLine(ex.Message);
+        }
+      }
+      return (ActionResult) this.RedirectToAction("Detailsview", (object) new
+      {
+        SearchParam = data.Username,
+        CurrentPage = 1,
+        currentFilter = data.Username
+      });
+    }
+
+    [HttpPost]
+    public JsonResult GetSingleLink(SDR_QFS_Data data)
+    {
+      if (data.TID <= 0)
+        return this.Json((object) null, (JsonRequestBehavior) 0);
+      List<SDR_QFS_Data> list = ((IEnumerable<SDR_QFS_Data>) this._context.get_Database().SqlQuery<SDR_QFS_Data>("Exec dbo.SDR_QFS_Topic @TopicFilter", new object[1]
+      {
+        (object) new SqlParameter("@TopicFilter", (object) data.TID)
+      })).ToList<SDR_QFS_Data>();
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__24.\u003C\u003Ep__0 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__24.\u003C\u003Ep__0 = CallSite<Func<CallSite, object, int, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "TotalRecords", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj = HomeController.\u003C\u003Eo__24.\u003C\u003Ep__0.Target((CallSite) HomeController.\u003C\u003Eo__24.\u003C\u003Ep__0, ((ControllerBase) this).get_ViewBag(), list.Count);
+      return this.Json((object) list, (JsonRequestBehavior) 0);
+    }
+
+    [HttpPost]
+    public ActionResult EditDataLink(SDR_QFS_Data data)
+    {
+      if (!this.get_ModelState().get_IsValid())
+        return (ActionResult) this.View("MenuItem", (object) data);
+      // ISSUE: reference to a compiler-generated field
+      if (HomeController.\u003C\u003Eo__25.\u003C\u003Ep__0 == null)
+      {
+        // ISSUE: reference to a compiler-generated field
+        HomeController.\u003C\u003Eo__25.\u003C\u003Ep__0 = CallSite<Func<CallSite, object, string, object>>.Create(Binder.SetMember(CSharpBinderFlags.None, "Message", typeof (HomeController), (IEnumerable<CSharpArgumentInfo>) new CSharpArgumentInfo[2]
+        {
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, (string) null),
+          CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.Constant, (string) null)
+        }));
+      }
+      // ISSUE: reference to a compiler-generated field
+      // ISSUE: reference to a compiler-generated field
+      object obj = HomeController.\u003C\u003Eo__25.\u003C\u003Ep__0.Target((CallSite) HomeController.\u003C\u003Eo__25.\u003C\u003Ep__0, ((ControllerBase) this).get_ViewBag(), nameof (EditDataLink));
+      if (!string.IsNullOrEmpty(data.Data))
+      {
+        SDR_QFS_Data sdrQfsData = this._context.SDR_QFS_Data.Find(new object[1]
+        {
+          (object) data.TID
+        });
+        sdrQfsData.TID = data.TID;
+        sdrQfsData.GroupID = data.GroupID;
+        sdrQfsData.TopicID = data.TopicID;
+        sdrQfsData.Topic = data.Topic;
+        sdrQfsData.Type = data.Type;
+        sdrQfsData.SortOrder = data.SortOrder;
+        sdrQfsData.Description = data.Description;
+        sdrQfsData.Data = data.Data;
+        sdrQfsData.Location = data.Location;
+        sdrQfsData.Format = data.Format;
+        sdrQfsData.Detail = data.Detail;
+        this._context.SaveChanges();
+      }
+      return (ActionResult) this.RedirectToAction("MenuItem", (object) new
+      {
+        sortOrder = "",
+        currentFilter = data.Description,
+        searchString = data.Description,
+        page = 1
+      });
+    }
+  }
+}

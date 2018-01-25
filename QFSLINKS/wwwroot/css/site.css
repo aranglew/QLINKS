@@ -341,3 +341,6 @@ input.ViewDetails:read-only
     /*color: #fff;
     border-bottom: 5px solid #111;*/
 }
+.blue {
+    color: blue;
+}

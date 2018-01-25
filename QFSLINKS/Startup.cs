@@ -12,6 +12,7 @@ using QFSLINKS.Data;
 using QFSLINKS.Models;
 using QFSLINKS.Services;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Newtonsoft.Json.Serialization;
 
 namespace QFSLINKS
 {
@@ -37,7 +38,11 @@ namespace QFSLINKS
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
-            services.AddMvc();
+            services.AddDbContext<QfslinksContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddMvc()
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver()); ;
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
         }
 
@@ -61,9 +66,23 @@ namespace QFSLINKS
 
             app.UseMvc(routes =>
             {
+                
+
+
+                routes.MapRoute(
+                    name: "UserList",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "Detailsview",
+                    template: "{controller=Home}/{action=Detailsview}/{id?}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+
+
             });
         }
     }

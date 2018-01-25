@@ -14,7 +14,8 @@
                             <fieldset id="modalfunctionsLinkC1" disabled>
                                 <input type="hidden" name="tid" id="tid" />
                                 <div class="form-group">
-                                    @Html.Label("Topic Id", new { @class = "control-label" })
+                                    @*@Html.Label("Topic Id", new { @class = "control-label" })*@
+                                    @Html.DisplayName("Topic Id")
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-text-size"></i></span>
                                         @Html.TextBox("topicid", null, new { id = "topicid", @class = "form-control" })
@@ -23,7 +24,7 @@
 
 
                                 <div class="form-group">
-                                    @Html.Label("Order", new { @class = "control-label" })
+                                    @*@Html.Label("Order", new { @class = "control-label" })*@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-sort-by-order"></i></span>
                                         @Html.TextBox("sortorder", null, new { id = "sortorder", @class = "form-control", placeholder="Order" })
@@ -31,7 +32,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Format", new { @class = "control-label" })
+                                    @*@Html.Label("Format", new { @class = "control-label" })*@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-eye-open"></i></span>
                                         <textarea rows="4" cols="50" id="format" name="format" class="form-control"></textarea>
@@ -39,7 +40,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Detail", new { @class = "control-label" })
+                                    @*@Html.Label("Detail", new { @class = "control-label" })*@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-menu-hamburger"></i></span>
                                         <textarea rows="4" cols="50" id="detail" name="detail" class="form-control"></textarea>
@@ -55,7 +56,7 @@
                                 <div class="form-group">
 
                                     <div class="form-group">
-                                        @Html.Label("Type", new { @class = "control-label" })
+                                        @*@Html.Label("Type", new { @class = "control-label" })*@
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-text-width "></i></span>
                                             <select id="type" class="form-control"> </select>
@@ -63,7 +64,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        @Html.Label("Description", new { @class = "control-label" })
+                                        @*@Html.Label("Description", new { @class = "control-label" })*@
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
                                             @Html.TextBox("description", null, new { id = "description", @class = "form-control" })
@@ -71,7 +72,7 @@
                                     </div>
 
 
-                                    @Html.Label("Data", new { @class = "control-label" })
+                                    @*@Html.Label("Data", new { @class = "control-label" })*@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-menu-hamburger"></i></span>
                                         <textarea rows="4" cols="50" id="data" name="data" class="form-control"></textarea>
@@ -79,7 +80,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Label("Location", new { @class = "control-label" })
+                                    @*@Html.Label("Location", new { @class = "control-label" })*@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                         <textarea rows="4" cols="50" id="location" name="location" class="form-control"></textarea>
